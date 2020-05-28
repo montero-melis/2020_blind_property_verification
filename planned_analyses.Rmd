@@ -23,7 +23,32 @@ source("myfunctions.R")
 Introduction
 ===========
 
-Property verification paradigms could be a sensitive method to investigate experience-dependent conceptual processing differences. There is reason to believe that in sighted individuals, visual property verification relies on visual simulation: Edmiston & Lupyan (2017) observed that interfering with visual processing impaired verification of visual (tabel – flat) but not categorical properties (table – is furniture). This is consistent with a study of mine (Ostarek & Huettig, 2017), in which the same type of visual noise was found to interfere with the processing of highly imageable concrete vs. abstract words in a concreteness task (where access to perceptual information is directly task relevant) but not in a LDT and a word-class judgement task (where perceptual information does not need to be accessed). To test the effect of sensory experience, we will run a property verification experiment in which blind and sighted participants verify unimodal visual (e.g., banana – yellow) vs. multimodal properties (banana – elongated) vs. categorical properties (banana – fruit). If experience affects conceptual processing, groups should differ most strongly on unimodal visual properties for which experience differs the most. It will be interesting to find out whether verifying multimodal properties, for which, in addition to vision other modality-specific experience is available, will differ between groups. It is possible that groups do not differ, even for unimodal visual properties, despite experience affecting conceptual processing. For instance, knowing that a banana is yellow can not only be based on sensory experience but also on word co-occurrence statistics. To distinguish between these possibilities, a follow-up experiment will be run in which unusual but possible (banana – black) vs. impossible (banana – blue) unimodal visual properties will be used. 
+Property verification paradigms could be a sensitive method to investigate
+experience-dependent conceptual processing differences. There is reason to
+believe that in sighted individuals, visual property verification relies on
+visual simulation: Edmiston & Lupyan (2017) observed that interfering with
+visual processing impaired verification of visual (tabel – flat) but not
+categorical properties (table – is furniture). This is consistent with a study
+of mine (Ostarek & Huettig, 2017), in which the same type of visual noise was
+found to interfere with the processing of highly imageable concrete vs. abstract
+words in a concreteness task (where access to perceptual information is directly
+task relevant) but not in a LDT and a word-class judgement task (where
+perceptual information does not need to be accessed). To test the effect of
+sensory experience, we will run a property verification experiment in which
+blind and sighted participants verify unimodal visual (e.g., banana – yellow)
+vs. multimodal properties (banana – elongated) vs. categorical properties
+(banana – fruit). If experience affects conceptual processing, groups should
+differ most strongly on unimodal visual properties for which experience differs
+the most. It will be interesting to find out whether verifying multimodal
+properties, for which, in addition to vision other modality-specific experience
+is available, will differ between groups. It is possible that groups do not
+differ, even for unimodal visual properties, despite experience affecting
+conceptual processing. For instance, knowing that a banana is yellow can not
+only be based on sensory experience but also on word co-occurrence statistics.
+To distinguish between these possibilities, a follow-up experiment will be run
+in which unusual but possible (banana – black) vs. impossible (banana – blue)
+unimodal visual properties will be used. 
+
 
 Experimental design
 ==================
@@ -131,7 +156,6 @@ make_data(c(1, 0, 0, 0, 0.2, 0.5)) %>%
 ```
 
 
-
 ### We predict *interactions*!
 
 Note that we only care about the interactions mentioned above. Main effects of
@@ -162,10 +186,7 @@ Based on previous studies, we expect that colour-based properties will be
 particularly challenging for blind participants. Here again we are testing
 an interaction. We expect to see the following pattern of results:
 
-
 ```{r}
 make_data(c(1, .5, .2, .8), "colour") %>%
   plot_data(DV_name = "RT", colour = TRUE)
 ```
-
-
