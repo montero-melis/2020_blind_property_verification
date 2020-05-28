@@ -1,0 +1,171 @@
+---
+title: 'Property verification in blind people: Planned analyses'
+author: "Eva Poort, Guillermo Montero-Melis & Markus Ostarek"
+output:
+  pdf_document: default
+  word_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = F, fig.height = 2, fig.width = 6)
+```
+
+```{r, message=FALSE}
+library("knitr")
+library("tidyverse")
+```
+
+```{r}
+source("myfunctions.R")
+```
+
+
+Introduction
+===========
+
+Property verification paradigms could be a sensitive method to investigate experience-dependent conceptual processing differences. There is reason to believe that in sighted individuals, visual property verification relies on visual simulation: Edmiston & Lupyan (2017) observed that interfering with visual processing impaired verification of visual (tabel – flat) but not categorical properties (table – is furniture). This is consistent with a study of mine (Ostarek & Huettig, 2017), in which the same type of visual noise was found to interfere with the processing of highly imageable concrete vs. abstract words in a concreteness task (where access to perceptual information is directly task relevant) but not in a LDT and a word-class judgement task (where perceptual information does not need to be accessed). To test the effect of sensory experience, we will run a property verification experiment in which blind and sighted participants verify unimodal visual (e.g., banana – yellow) vs. multimodal properties (banana – elongated) vs. categorical properties (banana – fruit). If experience affects conceptual processing, groups should differ most strongly on unimodal visual properties for which experience differs the most. It will be interesting to find out whether verifying multimodal properties, for which, in addition to vision other modality-specific experience is available, will differ between groups. It is possible that groups do not differ, even for unimodal visual properties, despite experience affecting conceptual processing. For instance, knowing that a banana is yellow can not only be based on sensory experience but also on word co-occurrence statistics. To distinguish between these possibilities, a follow-up experiment will be run in which unusual but possible (banana – black) vs. impossible (banana – blue) unimodal visual properties will be used. 
+
+Experimental design
+==================
+
+Task
+----
+
+Participants hear a property ("yellow"); after a delay the hear a noun
+("banana").
+They have to press a button as fast as they can to indicate whether the noun
+matches the property or not.
+
+
+Basic design
+------------
+
+The basic design is a 3 (property) x 2 (group) design with the following factor levels:
+
+- *Property type*: visual, multimodal, categorical.
+- *Group*: sighted, blind.
+
+
+Details of the design
+---------------------
+
+Due to the nature of the task, there need to be *yes* and *no* trials (50% of
+each) depending on whether the feature matches the referent or not:
+
+- *Match*: yes, no.
+
+Additionally, we want a variety of nouns, both to be able to generalize our
+results and for comparability with earlier work.
+We will have the following categories of referents:
+
+- *Object category*: common animals, zoo animals, fruits/vegetables, household
+items, weather phenomena.
+
+Finally, the visual condition has two subtypes of properties. These
+properties are not crossed for every item, but they are crossed by object
+category. Some items will only have colour visual properties; others will only
+have non-colour visual properties; yet others will have both.
+For the latter ones, which version is shown to participants will be 
+counterbalanced across participants:
+
+- *Visual subtype* (partially crossed and counterbalanced): colour, non-colour properties.
+
+
+Stimulus structure
+==============
+
+The stimuli have the following structure (I simplify the categories somewhat):
+
+```{r}
+df <- expand.grid(
+  property_type = c("visual", "multimodal", "categorical"),
+  visual_type = NA,
+  match = c("yes", "no"),
+  category = c("animals", "fruits", "man-made"),
+  N = "?"
+  ) %>%
+  arrange(property_type, match, category)
+df <- bind_rows(df %>% filter(property_type == "visual"), df) %>%
+  mutate(
+    visual_type = c(rep(c("colour", "non-colour"), each = 6), rep(NA, 12))
+    )
+df %>% kable()
+```
+
+
+Planned analyses
+================
+
+Modality-specific disadvantage
+-----------------------------
+
+### Expected results
+
+We expect that blind participants will be relatively less accurate and slower
+than sighted participants when verifying visual versus categorical properties.
+That is, we take the categorical properties to be a baseline against which
+we evaluate the other two properties and we expect to see a 
+*group-by-property interaction* effect.
+
+Specifically, we expect the following graded effect:
+
+- The strongest interaction when purely visual properties are compared to
+categorical properties across groups
+- A numerically weaker interaction when comparing multimodal to categorical
+properties
+- The intermediate status of multimodal properties might or might not lead to
+a significant interaction when comparing them to purely visual properties 
+
+Schematically, this would look as follows for *d'*:
+
+```{r}
+make_data(c(1, 0, 0, 0, -0.2, -0.5)) %>%
+  plot_data("d'")
+```
+
+And analogously for reaction times:
+
+```{r}
+make_data(c(1, 0, 0, 0, 0.2, 0.5)) %>%
+  plot_data("RT")
+```
+
+
+
+### We predict *interactions*!
+
+Note that we only care about the interactions mentioned above. Main effects of
+properties are not of interest here, since the properties differ in all kinds
+of ways.
+Neither is a main effect of group of interest, as this again could be due to
+factors that are not of interest here (such as difference in computer hardware
+or frequency of computer usage).
+
+Thus, a pattern of results like the following would still be consistent with
+our hypothesis (here illustrated for RTs):
+
+```{r}
+make_data(c(1, -.1, .3, -.1, 0.3, 0.7)) %>%
+  plot_data("RT")
+```
+
+
+Colour vs non-colour visual properties
+-------------------------------------
+
+We will also investigate whether different types of visual properties have
+differential effects on blind participants.
+In particular we are interested in whether colour vs non-colour properties
+lead to worse performance.
+
+Based on previous studies, we expect that colour-based properties will be
+particularly challenging for blind participants. Here again we are testing
+an interaction. We expect to see the following pattern of results:
+
+
+```{r}
+make_data(c(1, .5, .2, .8), "colour") %>%
+  plot_data(DV_name = "RT", colour = TRUE)
+```
+
+
