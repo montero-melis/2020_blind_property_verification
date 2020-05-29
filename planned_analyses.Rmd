@@ -1,9 +1,9 @@
 ---
 title: 'Property verification in blind people: Planned analyses'
 author: "Eva Poort, Guillermo Montero-Melis & Markus Ostarek"
+date: "`r as.character(Sys.Date())`"
 output:
   pdf_document: default
-  word_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -156,7 +156,7 @@ make_data(c(1, 0, 0, 0, 0.2, 0.5)) %>%
 ```
 
 
-### We predict *interactions*!
+### NB: We predict *interactions*!
 
 Note that we only care about the interactions mentioned above. Main effects of
 properties are not of interest here, since the properties differ in all kinds
@@ -184,9 +184,29 @@ lead to worse performance.
 
 Based on previous studies, we expect that colour-based properties will be
 particularly challenging for blind participants. Here again we are testing
-an interaction. We expect to see the following pattern of results:
+an interaction. We expect to see the following pattern of results.
+
+For discrimination (*d'*):
+
+```{r}
+make_data(c(1.5, -.4, -.2, -.7), "colour", print_modelmatrix = FALSE) %>%
+  plot_data(DV_name = "d'", colour = TRUE)
+```
+
+
+And for reaction times:
 
 ```{r}
 make_data(c(1, .5, .2, .8), "colour") %>%
   plot_data(DV_name = "RT", colour = TRUE)
 ```
+
+
+Analyses
+--------
+
+- *d'* scores will be analyzed with repeated-measures ANOVA and paired *t*-tests
+- Reaction times will be analyzed with linear mixed-effects models on
+log-transformed RTs + paired tests of the three 2-way interactions with emmeans
+
+Analysis pipeline to come.
